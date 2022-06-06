@@ -1,0 +1,89 @@
+<html  th:replace="~{base/base :: layout (~{:: main})}">
+<main>
+    <div class="container" style="margin-top: 50px;">
+    
+    <h4>+ Inserir Alunos</h4>
+    <hr>
+    <br>
+    <!--Nome-->
+    <form method="post" action="./insert-alunos" th:object="${aluno}">
+       <div class="row">
+         <div class="col-md-6 form-group offset-md-3 " style="margin-top: 10px">
+         <label ><b>Nome do Aluno:</b></label>
+         <input class="form-control" placeholder="Ex: Catiele Santos" style="margin-top: 10px" th:field="*{nome}">  
+            <br>
+            <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('nome')}">
+            <label class="validation-message" th:errors="*{nome}"></label>
+         </div>    
+        </div>
+       </div>
+       <!--Curso-->
+       <div class="row">
+        <div class="col-md-6 form-group offset-md-3">
+        <label style="margin-top: 10px"><b>Selecione o Curso:</b></label>
+        <select class="form-control" style="margin-top: 10px" th:field="*{curso}">
+             <option th:each="curso : ${T(br.com.academy.Enums.Curso).values()}"
+             th:value="${curso}" th:text="${curso}"></option>
+        </select>
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('curso')}">
+                    <label class="validation-message" th:errors="*{curso}"></label>
+        </div>
+       </div> 
+      </div> 
+        <!--Matricula-->
+        <div class="row">
+            <div class="col-md-6 form-group offset-md-3" style="margin-top: 20px">
+            <label style="margin-top: 10px"><b>Gerar MatrÍcula:</b></label>
+            <input class="form-control" id="matricula" style="margin-top: 10px" th:field="*{matricula}"> 
+            <button type="button" onclick="GerarMatricula();" class="btn btn-primary offset-md-4" style="margin-top: 15px; width: 25%">GERAR</button>     
+             <div class="alert alert-danger" style="margin-top: 25px" role="alert" th:if="${#fields.hasErrors('matricula')}">
+               <label class="validation-message" th:errors="*{matricula}"></label>
+             </div>
+           </div>
+          </div>
+          <!--Status-->
+			 <div class="row">
+			 	<div class="col-md-6 form-group offset-md-3">
+			 	     <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('status')}">
+                    <label class="validation-message" th:errors="*{status}"></label>
+                    </div>
+					<label><b>Selecione o Status:</b></label> 
+					<select class="form-control" style="margin-top: 10px" th:field="*{status}">
+					<option
+					th:each="status : ${T(br.com.academy.Enums.Status).values()}"
+					th:value="${status}" th:text="${status}">
+					</option>
+				</select> 
+			 </div>
+			</div>
+		<!-- Turno -->
+       <div class="row">
+         <div class="col-md-6 form-group offset-md-3" style="margin-top: 20px">
+         <label><b>Turno:</b></label>
+         <select class="form-control" style="margin-top: 10px" th:field="*{turno}">
+					<option
+					th:each="turno : ${T(br.com.academy.Enums.Turno).values()}"
+					th:value="${turno}" th:text="${turno}"></option> 
+		 </select> 
+		 <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('turno')}">
+            <label class="validation-message" th:errors="*{turno}"></label>
+         </div>
+        </div>
+       </div> 
+       
+        <div class="row" style="margin-left: 30px">
+		  <div class="col-md-5 form-group offset-md-4" style="margin-top: 20px">
+		   <button type="submit" class="btn btn-success">SALVAR</button> 
+		   <a th:href="@{/home}" class="btn btn-danger"  style="margin-top: 20px" >VOLTAR</a>
+		  </div> 
+      </div>
+		
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />	 
+			 
+		</form>   
+		&nbsp; &nbsp; &nbsp; &nbsp; 
+    </div>
+    
+</main>
+
+</html>
