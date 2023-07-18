@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -19,11 +18,15 @@ import br.com.academy.Enums.Curso;
 import br.com.academy.Enums.Status;
 import br.com.academy.Enums.Turno;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
+@ToString @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Builder
 @Table(name="aluno")
 public class Aluno implements Serializable {
 	
@@ -35,7 +38,7 @@ public class Aluno implements Serializable {
 	
 	@Column(name="nome")
 	@Size(min=3, max=50, message="O nome deverá conter entre 3 e 50 caracteres para continuar.")
-	@Pattern(regexp = "^[A-Z][a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÒÖÚÇÑ ]*$", message="O nome não deve começar com uma letra minúscula, número ou caractere especial.")
+	@Pattern(regexp = "^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÒÖÚÇÑ ]*$", message="O nome não deve começar com uma letra minúscula, número ou caractere especial.")
 	private String nome;
 	
 	@Column(name="curso")
@@ -57,49 +60,5 @@ public class Aluno implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@NotNull(message="Selecione um turno para continuar")
 	private Turno turno;
-	
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
-	public String getMatricula() {
-		return matricula;
-	}
-	public void setMatricula(String matricula) {
-		this.matricula = matricula;
-	}
-	
-	public Curso getCurso() {
-		return curso;
-	}
-	public void setCurso(Curso curso) {
-		this.curso = curso;
-	}
-	public Status getStatus() {
-		return status;
-	}
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-	public Turno getTurno() {
-		return turno;
-	}
-	public void setTurno(Turno turno) {
-		this.turno = turno;
-	}
-	
-	
-	
-	
-	
 
 }

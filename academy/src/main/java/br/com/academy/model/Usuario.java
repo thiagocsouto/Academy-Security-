@@ -20,10 +20,15 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
+@ToString @Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Builder
 @Table(name="usuario")
 public class Usuario implements Serializable, UserDetails {
 	
@@ -32,83 +37,65 @@ public class Usuario implements Serializable, UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	@Column(name="email")
+	@Email
 	private String email;
+	
 	@Size(min= 3, max= 20, message = "Usuario deve conter entre 3 a 20 caracteres")
 	@Column(name="login")
 	private String username;
+	
 	@Column(name="senha")
 	private String password;
 	
 	@Transient
 	private List<String> role;
 
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
+		@Override
+	 public Collection<? extends GrantedAuthority> getAuthorities() {
+	     List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>(); 		
+	     for (String auth : this.role) { 			
+	         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + auth)); 		
+	     }
+	     return grantedAuthorities; 	 
+	 }
 
+		@Override
+	 public String getPassword() {
+	     return this.password;
+	 } 
 	
-	 public List<String> getRole() {
-			return role;
-		}
-
-		public void setRole(List<String> role) {
-			this.role = role;
-		}
-
-	@Override
- public Collection<? extends GrantedAuthority> getAuthorities() {
-     List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>(); 		
-     for (String auth : this.role) { 			
-         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + auth)); 		
-     }
-     return grantedAuthorities; 	 
- }
-
-	@Override
- public String getPassword() {
-     return this.password;
- } 
-
- @Override
- public String getUsername() {
-     return this.username;
- }
-
- @Override
- public boolean isAccountNonExpired() {
-     return true;
- }
-
- @Override
- public boolean isAccountNonLocked() {
-     return true;
- }
-
- @Override
- public boolean isCredentialsNonExpired() {
-     return true;
- }
-
- @Override
- public boolean isEnabled() {
-     return true; 
- }
-
+	 @Override
+	 public String getUsername() {
+	     return this.username;
+	 }
+	
+	 @Override
+	 public boolean isAccountNonExpired() {
+	     return true;
+	 }
+	
+	 @Override
+	 public boolean isAccountNonLocked() {
+	     return true;
+	 }
+	
+	 @Override
+	 public boolean isCredentialsNonExpired() {
+	     return true;
+	 }
+	
+	 @Override
+	 public boolean isEnabled() {
+	     return true; 
+	 }
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
 	
+		
 	
 
 }

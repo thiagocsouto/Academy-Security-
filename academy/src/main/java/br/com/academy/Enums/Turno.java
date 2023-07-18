@@ -1,5 +1,9 @@
 package br.com.academy.Enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor @Getter
 public enum Turno {
 	
 	MATUTINO("matutino"),
@@ -7,9 +11,5 @@ public enum Turno {
 	NOTURNO("noturno");
 	
 	private String turno;
-	
-	private Turno (String turno) {
-		this.turno = turno;
-	}
 
 }

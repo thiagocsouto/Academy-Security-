@@ -1,24 +1,17 @@
 package br.com.academy.controller;
 
-import java.security.NoSuchAlgorithmException;
-
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.academy.model.Aluno;
 import br.com.academy.model.Usuario;
-import br.com.academy.repository.UsuarioRepository;
 import br.com.academy.service.UsuarioService;
-import br.com.academy.util.Util;
 
 
 @Controller

@@ -1,16 +1,11 @@
 package br.com.academy.service;
 
-import java.security.NoSuchAlgorithmException;
 
-import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.academy.exception.CriptoExistException;
-import br.com.academy.exception.EmailExistsException;
 import br.com.academy.model.Usuario;
 import br.com.academy.repository.UsuarioRepository;
-import br.com.academy.util.Util;
 
 @Service
 public class UsuarioService {

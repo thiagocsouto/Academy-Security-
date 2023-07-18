@@ -1,6 +1,9 @@
 package br.com.academy.Enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@AllArgsConstructor @Getter
 public enum Curso {
 	
 	ADMINISTRACAO("administração"),
@@ -10,8 +13,5 @@ public enum Curso {
 	ENFERMAGEM("enfermagem");
 	
 	private String curso;
-	private Curso(String curso) {
-		this.curso = curso;
-	}
-
+	
 } 

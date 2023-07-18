@@ -1,7 +1,9 @@
 package br.com.academy.Enums;
 
-import javax.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
+@AllArgsConstructor @Getter
 public enum Status {
 	
 	ATIVO("Ativo"),
@@ -11,8 +13,4 @@ public enum Status {
 	
 	private String status;
 	
-	private Status (String status) {
-		this.status = status;
-	}
-
 }
